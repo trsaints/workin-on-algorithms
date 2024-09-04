@@ -1,37 +1,43 @@
 #include <stdio.h>
- 
+
 int main() {
+    int i;
     int inputs[3];
 
     scanf("%d %d %d", &inputs[0], &inputs[1], &inputs[2]);
 
-    for (int i = 0; i < 3; i++)
-        printf("%d\n", inputs[i]);
+    int sorted_inputs[3];
 
-    int tmp = inputs[0];
+    for (i = 0; i < 3; i++) {
+        sorted_inputs[i] = inputs[i];
+    }
 
-    for (int i = 0; i < 3; i++) {
+    int tmp = sorted_inputs[0];
+
+    for (i = 0; i < 3; i++) {
         if ((i - 1) < 0) continue;
 
-        if (inputs[i] < inputs[i - 1]) {
-            // -14 < 21
-            tmp = inputs[i - 1];
-
-            // 21 -> 14
-            inputs[i - 1] = inputs[i];
-            inputs[i] = tmp;
+        // -8 < -3
+        if (sorted_inputs[i] < sorted_inputs[i - 1]) {
+            tmp = sorted_inputs[i - 1];
+            sorted_inputs[i - 1] = sorted_inputs[i];
+            sorted_inputs[i] = tmp;
         }
 
-        if (inputs[i - 1] < inputs[0]) {
-            tmp = inputs[0];
-            inputs[0] = inputs[i - 1];
-            inputs[i - 1] = tmp;
+        // -3 < -3
+        if (sorted_inputs[i - 1] < sorted_inputs[0]) {
+            tmp = sorted_inputs[0];
+            sorted_inputs[0] = sorted_inputs[i - 1];
+            sorted_inputs[i - 1] = tmp;
         }
     }
 
+    for (i = 0; i < 3; i++)
+        printf("%d\n", sorted_inputs[i]);
+
     printf("\n");
 
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         printf("%d\n", inputs[i]);
  
     return 0;
