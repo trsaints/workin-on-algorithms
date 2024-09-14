@@ -12,23 +12,23 @@ int main() {
         sorted_inputs[i] = inputs[i];
     }
 
-    int tmp = sorted_inputs[0];
+    int swap = sorted_inputs[0];
 
     for (i = 0; i < 3; i++) {
         if ((i - 1) < 0) continue;
 
         // -8 < -3
         if (sorted_inputs[i] < sorted_inputs[i - 1]) {
-            tmp = sorted_inputs[i - 1];
+            swap = sorted_inputs[i - 1];
             sorted_inputs[i - 1] = sorted_inputs[i];
-            sorted_inputs[i] = tmp;
+            sorted_inputs[i] = swap;
         }
 
         // -3 < -3
         if (sorted_inputs[i - 1] < sorted_inputs[0]) {
-            tmp = sorted_inputs[0];
+            swap = sorted_inputs[0];
             sorted_inputs[0] = sorted_inputs[i - 1];
-            sorted_inputs[i - 1] = tmp;
+            sorted_inputs[i - 1] = swap;
         }
     }
 
@@ -41,4 +41,8 @@ int main() {
         printf("%d\n", inputs[i]);
  
     return 0;
+}
+
+int ** sort_inputs() {
+    
 }
