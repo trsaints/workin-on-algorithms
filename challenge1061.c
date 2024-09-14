@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-#define TRUE 1
-#define FALSE 0
-
 typedef struct {
     int day,
         hour,
@@ -13,7 +10,6 @@ typedef struct {
 Datetime create_date(long timestamp);
 long get_timestamp_delta(Datetime start_date, Datetime due_date);
 Datetime get_date();
-
 
 int main() {
     Datetime start_date = get_date();
