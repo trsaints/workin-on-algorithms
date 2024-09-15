@@ -5,7 +5,7 @@ int main() {
     int N;
 
     char line_buffer[32];
-    char result_buffer[262144];
+    static char result_buffer[262144];
 
     if (fgets(line_buffer, sizeof(line_buffer), stdin))
         sscanf(line_buffer, "%d", &N);
