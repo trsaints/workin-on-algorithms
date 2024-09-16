@@ -34,25 +34,6 @@ ArrayEntry get_greatest_entry(int * inputs) {
     int greatest_value = inputs[0],
         greatest_index = 0;
 
-    int greatest_values[INPUT_COUNT],
-        greatest_indexes[INPUT_COUNT];
-
-    greatest_values[0] = greatest_value;
-    greatest_indexes[0] = greatest_index;
-
-    for (int i = 1; i < INPUT_COUNT; i++) {
-        greatest_values[i] = -1;
-        greatest_indexes[i] = -1;
-    }
-
-    int current_is_greater = FALSE,
-        previous_is_greater = FALSE,
-        next_is_greater = FALSE;
-
-    int current_equals = FALSE,
-        previous_equals = FALSE,
-        next_equals = FALSE;
-
     for (int i = 1; i < INPUT_COUNT; i++) {
         if (inputs[i] >= greatest_value) {
             greatest_value = inputs[i];
