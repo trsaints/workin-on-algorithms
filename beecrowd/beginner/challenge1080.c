@@ -25,7 +25,7 @@ int main() {
 
     ArrayEntry greatest_entry = get_greatest_entry(user_inputs);
 
-    printf("%d\n%d\n", greatest_entry.number, greatest_entry.index);
+    printf("%d\n%d\n", greatest_entry.number, greatest_entry.index + 1);
 
     return 0;
 }
@@ -49,39 +49,15 @@ ArrayEntry get_greatest_entry(int * inputs) {
         previous_is_greater = FALSE,
         next_is_greater = FALSE;
 
-    for (int i = 0; i < INPUT_COUNT; i++) {
-        if ((i - 1) < 0 
-            || (i + 1) > INPUT_COUNT) continue;
+    int current_equals = FALSE,
+        previous_equals = FALSE,
+        next_equals = FALSE;
 
-        current_is_greater = (inputs[i] > inputs[i - 1]) 
-                                && (inputs[i] > inputs[i + 1])
-                                && (inputs[i] > greatest_value);
-
-        previous_is_greater = (inputs[i - 1] > inputs[i])
-                                && (inputs[i - 1] > inputs[i + 1])
-                                && (inputs[i - 1] > greatest_value);
-
-        next_is_greater = (inputs[i + 1] > inputs[i])
-                            && (inputs[i + 1] > inputs[i - 1])
-                            && (inputs[i - 1] > greatest_value);
-
-        if (current_is_greater) {
+    for (int i = 1; i < INPUT_COUNT; i++) {
+        if (inputs[i] >= greatest_value) {
             greatest_value = inputs[i];
             greatest_index = i;
         }
-        else if (previous_is_greater) {
-            greatest_value = inputs[i - 1];
-            greatest_index = i - 1;
-        } else if (next_is_greater) {
-            greatest_value = inputs[i + 1];
-            greatest_index = i + 1;
-        }
-
-
-        if (!current_is_greater && !previous_is_greater && !next_is_greater) continue;
-
-        greatest_values[i] = greatest_value;
-        greatest_indexes[i] = greatest_index;
     }
 
     ArrayEntry result = {
