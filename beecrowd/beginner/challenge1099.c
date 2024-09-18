@@ -48,32 +48,26 @@ char * list_consecutive_sum(int test_cases) {
 }
 
 int sum_odd_interval(int start, int end) {
-    int array_length = end - start;
-
-    if (array_length < 0) array_length *= -1;
-    int result = 0;
+    if (start > end) {
+        int tmp = start;
+        start = end;
+        end = tmp;
+    }
     
-    if (start == end || array_length < 2) return result;
+    if ((start == end) || (end - start < 2)) 
+        return 0;
 
-    int is_ascending = start < end;
-    int i = is_ascending ? 0 : array_length;
+    if (start % 2 != 0) start++;
+    if (end % 2 != 0) end--;
 
-    int current = is_ascending ? start + 1 : start - 1;
+    int current = start + 1,
+        result = 0;
 
-    while (current != end) {
-        if (current % 2 != 0)
-            result += current;
-
-        if (is_ascending) {
-            current++;    
-            i++;
-            continue;
-        }
-        
-        current--;
-        i--;
+    while (current < end) {
+        result += current;
+        current += 2;    
     }
 
-    return result;
+    return result;  
 }
 
