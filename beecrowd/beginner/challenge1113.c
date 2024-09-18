@@ -3,10 +3,8 @@
 
 int main() {
     static char read_buffer[512];
-    char *read_position = read_buffer,
-         *read_end = read_buffer + sizeof(read_buffer);
-
     static char result_buffer[4096];
+    
     char *result_position = result_buffer,
          *result_end = result_buffer + sizeof(result_buffer);
 
