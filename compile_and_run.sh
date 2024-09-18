@@ -7,7 +7,7 @@ fi
 
 filepath=$1
 
-gcc -o "${filepath}.o" "${filepath}.c"
+gcc -o "${filepath}.o" "${filepath}.c" -lm
 
 if [ $? -ne 0 ]; then
   echo "Compilation failed."
