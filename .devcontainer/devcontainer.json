@@ -9,7 +9,7 @@
                 "editor.formatOnSave": true
             },
             "extensions": [
-                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
                 "github.copilot",
                 "timonwong.shellcheck",
                 "ms-python.python",
@@ -19,5 +19,5 @@
             ]
         }
     },
-    "postCreateCommand": ""
+    "postCreateCommand": "code --set-theme dracula"
 }
