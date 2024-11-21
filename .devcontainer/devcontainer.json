@@ -18,6 +18,5 @@
                 "dracula-theme.theme-dracula"
             ]
         }
-    },
-    "postCreateCommand": "code --set-theme dracula"
+    }
 }

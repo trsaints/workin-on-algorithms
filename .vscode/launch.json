@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug C/C++ Program",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.o", // replace with the path to your compiled executable
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "DEBUG_C_FILE", // replace with the name of your task in tasks.json
+            "miDebuggerPath": "/usr/bin/gdb", // replace with the path to your debugger
+            "logging": {
+                "engineLogging": true
+            }
+        }
+    ]
+}
