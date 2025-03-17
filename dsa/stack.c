@@ -15,7 +15,7 @@ void stack_print(struct stack *stack);
 
 int main(int argc, int **argv)
 {
- 1   struct stack my_stack = {
+    struct stack my_stack = {
         .top = 0,
     };
 
