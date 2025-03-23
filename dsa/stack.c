@@ -11,6 +11,7 @@ struct stack
 };
 unsigned stack_empty(struct stack *stack);
 unsigned stack_push(struct stack *stack, int x);
+unsigned stack_pop(struct stack *stack);
 void stack_print(struct stack *stack);
 
 int main(int argc, int **argv)
@@ -21,9 +22,11 @@ int main(int argc, int **argv)
 
     for (int i = 0; i < 100; i++)
     {
-        stack_push(&my_stack, i);
+        stack_push(&my_stack, rand());
     }
 
+    stack_print(&my_stack);
+    stack_pop(&my_stack);
     stack_print(&my_stack);
 }
 
@@ -34,7 +37,7 @@ unsigned stack_empty(struct stack *stack)
 
 unsigned stack_push(struct stack *stack, int x)
 {
-    if ((stack->top + 1) > STACK_SIZE)
+    if (stack->top >= STACK_SIZE)
         return 0;
 
     stack->top++;
@@ -43,16 +46,28 @@ unsigned stack_push(struct stack *stack, int x)
     return stack->top;
 }
 
+unsigned stack_pop(struct stack *stack)
+{
+    if (stack_empty(stack))
+        return 0;
+
+    int popped = stack->items[stack->top - 1];
+
+    stack->items[stack->top - 1] = 0;
+    stack->top--;
+
+    return popped;
+}
+
 void stack_print(struct stack *stack)
 {
-    char out_buffer[sizeof(int) * STACK_SIZE];
-    char *out_position = out_buffer,
-         *out_end = out_buffer + sizeof(out_buffer);
+    printf("stack:\ntop: %d\n", stack->top);
+    printf("[");
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < stack->top; i++)
     {
-        out_position += snprintf(out_position, out_end - out_position, "%d ", stack->items[stack->top - 1]);
+        printf("%d ", stack->items[i]);
     }
 
-    printf("[%s]\n", out_buffer);
+    printf("]\n\n");
 }
