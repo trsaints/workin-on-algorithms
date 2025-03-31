@@ -16,6 +16,7 @@ struct Node
 struct LinkedList *linked_list_init();
 struct Node *node_init(int x);
 void linked_list_insert(struct LinkedList *l, int x);
+struct Node *linked_list_at(struct LinkedList *l, unsigned i);
 struct Node *linked_list_search(struct LinkedList *l, int x);
 void linked_list_free(struct LinkedList *list);
 
@@ -32,6 +33,10 @@ int main(void)
         int x = r % 42 == 0 ? 42 : r;
         linked_list_insert(my_list, x);
     }
+
+    struct Node *fourthy_second = linked_list_at(my_list, 42);
+
+    printf("42th element in my_list is %d\n", fourthy_second->value);
 
     struct Node *found = linked_list_search(my_list, 42);
 
@@ -64,6 +69,20 @@ void linked_list_insert(struct LinkedList *l, int x)
     struct Node *new = node_init(x);
     new->next = l->head;
     l->head = new;
+}
+
+struct Node *linked_list_at(struct LinkedList *l, unsigned i)
+{
+    struct Node *current = l->head;
+    unsigned c = 0;
+
+    while (c < i)
+    {
+        current = current->next;
+        c++;
+    }
+
+    return current;
 }
 
 struct Node *linked_list_search(struct LinkedList *l, int x)
