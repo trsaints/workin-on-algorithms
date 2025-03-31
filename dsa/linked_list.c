@@ -19,10 +19,8 @@ void linked_list_free(struct LinkedList *list);
 
 int main(void)
 {
-    struct LinkedList *my_list = linked_list_init(22);
+    struct LinkedList *my_list = linked_list_init();
     my_list->head = node_init(42);
-
-    struct Node *next = my_list->head->next;
 
     for (unsigned i = 0; i < 100; i++)
     {
