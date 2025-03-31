@@ -15,6 +15,7 @@ struct Node
 struct LinkedList *linked_list_init();
 struct Node *node_init(int x);
 void linked_list_insert(struct LinkedList *l, int x);
+struct Node *linked_list_search(struct LinkedList *l, int x);
 void linked_list_free(struct LinkedList *list);
 
 int main(void)
@@ -26,6 +27,19 @@ int main(void)
     {
         linked_list_insert(my_list, rand());
     }
+
+    struct Node *found = linked_list_search(my_list, 42);
+
+    if (found)
+    {
+        printf("%d found in my_list", found->value);
+
+        return 0;
+    }
+
+    printf("value not found in my_list");
+
+    return -1;
 }
 
 struct LinkedList *linked_list_init()
@@ -50,6 +64,19 @@ void linked_list_insert(struct LinkedList *l, int x)
     struct Node *new = node_init(x);
     new->next = l->head;
     l->head = new;
+}
+
+struct Node *linked_list_search(struct LinkedList *l, int x)
+{
+    struct Node *current = l->head;
+
+    while (current && current->value != x)
+    {
+        struct Node *next = current->next;
+        current = next;
+    }
+
+    return current;
 }
 
 void linked_list_free(struct LinkedList *list)
