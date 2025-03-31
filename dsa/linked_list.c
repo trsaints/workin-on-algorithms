@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 struct LinkedList
 {
@@ -20,26 +21,25 @@ void linked_list_free(struct LinkedList *list);
 
 int main(void)
 {
+    srand(time(NULL));
+
     struct LinkedList *my_list = linked_list_init();
-    my_list->head = node_init(42);
+    my_list->head = node_init(rand());
 
     for (unsigned i = 0; i < 100; i++)
     {
-        linked_list_insert(my_list, rand());
+        int r = rand();
+        int x = r % 42 == 0 ? 42 : r;
+        linked_list_insert(my_list, x);
     }
 
     struct Node *found = linked_list_search(my_list, 42);
 
-    if (found)
-    {
-        printf("%d found in my_list", found->value);
+    int status = found ? 0 : -1;
 
-        return 0;
-    }
+    linked_list_free(my_list);
 
-    printf("value not found in my_list");
-
-    return -1;
+    return status;
 }
 
 struct LinkedList *linked_list_init()
@@ -69,11 +69,18 @@ void linked_list_insert(struct LinkedList *l, int x)
 struct Node *linked_list_search(struct LinkedList *l, int x)
 {
     struct Node *current = l->head;
+    unsigned c = 0;
 
     while (current && current->value != x)
     {
         struct Node *next = current->next;
         current = next;
+        c++;
+    }
+
+    if (current)
+    {
+        printf("found %d after %d iterations\n", x, c);
     }
 
     return current;
