@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct LinkedList
+{
+    struct Node *head;
+};
+
+struct Node
+{
+    int value;
+    struct Node *next;
+};
+
+struct LinkedList *linked_list_init();
+struct Node *node_init(int x);
+void linked_list_insert(struct LinkedList *l, int x);
+void linked_list_free(struct LinkedList *list);
+
+int main(void)
+{
+    struct LinkedList *my_list = linked_list_init(22);
+    my_list->head = node_init(42);
+
+    struct Node *next = my_list->head->next;
+
+    for (unsigned i = 0; i < 100; i++)
+    {
+        linked_list_insert(my_list, rand());
+    }
+}
+
+struct LinkedList *linked_list_init()
+{
+    struct LinkedList *new = calloc(1, sizeof(struct LinkedList));
+    new->head = NULL;
+
+    return new;
+}
+
+struct Node *node_init(int x)
+{
+    struct Node *new = calloc(1, sizeof(struct Node));
+    new->value = x;
+    new->next = NULL;
+
+    return new;
+}
+
+void linked_list_insert(struct LinkedList *l, int x)
+{
+    struct Node *new = node_init(x);
+    new->next = l->head;
+    l->head = new;
+}
+
+void linked_list_free(struct LinkedList *list)
+{
+    struct Node *current = list->head;
+
+    while (current)
+    {
+        struct Node *next = current->next;
+        free(current);
+        current = next;
+    }
+
+    free(list);
+}
